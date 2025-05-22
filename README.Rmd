@@ -1,0 +1,54 @@
+---
+title: "diagnostics"
+output: github_document
+---
+
+# diagnostics <img src="https://img.shields.io/badge/R%20Package-Diagnostics-blue.svg" align="right" height="30"/>
+
+A lightweight, base R–driven tool for quickly checking linear and logistic regression assumptions.
+
+## 🔍 Features
+
+The `diagnostics` package provides a simple interface for assumption checking in linear and logistic regression models:
+
+- ✅ Residual diagnostics using `plot(lm)` or `plot(glm)`
+- ✅ Automatic standardization of predictors (mean = 0, sd = 1)
+- ✅ Multicollinearity checks via VIF (including approximate VIF for GLMs)
+
+## 📦 Installation
+
+```{r}
+# install.packages("remotes")
+remotes::install_github("jgmotta731/diagnostics")
+```
+
+
+## 🚀 Quick Start
+```{r}
+library(diagnostics)
+
+# Linear regression assumption checks (predictors are standardized automatically)
+check_assumptions(mtcars, mpg, c(wt, hp, qsec), model_type = "lm")
+
+# Logistic regression assumption checks (binary response required)
+check_assumptions(mtcars, am, c(wt, hp), model_type = "glm")
+```
+
+## 📊 Outputs
+- Displays 4 base R diagnostic plots using `plot(model)`
+- Automatically standardizes predictors before model fitting
+- Prints Variance Inflation Factors (VIF) to console:
+  - For `lm`: directly from `car::vif()`
+  - For `glm`: approximated using a linear model
+
+## 📚 Function Reference
+| Function              | Description                                                             |
+|-----------------------|-------------------------------------------------------------------------|
+| `check_assumptions()` | Run all core diagnostics for `lm` or `glm` models using base R plotting |
+
+## 🛠 Requirements
+- R 4.1 or later  
+- Suggested: `car` (for VIF calculation)
+
+## 📄 License
+MIT © Jack Motta
